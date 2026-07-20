@@ -39,16 +39,6 @@ cd palette
 open index.html   # or just double-click it
 ```
 
-## Deploying to GitHub Pages
-
-1. Push this repo to GitHub as `palette`
-2. Go to **Settings → Pages**
-3. Under **Source**, choose the `main` branch and `/ (root)` folder
-4. Save — the site will be live at `https://gitwingo.github.io/palette`
-
-## License
-
-No license has been set yet — add one (MIT is a common, permissive choice) if you plan to share or accept contributions.
 
 ---
 

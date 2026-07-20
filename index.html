@@ -2,7 +2,54 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>palette.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>palette. — Free Online Color Palette Generator & Color Picker Tool</title>
+<meta name="description" content="Paste a hex code, RGB, HSL, or color name and instantly generate beautiful color palettes. Lock colors, check WCAG contrast, export as CSS/SCSS/Tailwind, and download a shareable PNG card. Free, no signup, works in your browser.">
+<meta name="keywords" content="color palette generator, color picker, hex to rgb, color scheme generator, palette maker, color combinations, contrast checker, css color variables">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F7F7F5">
+<link rel="canonical" href="https://gitwingo.github.io/palette/">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="palette. — Free Online Color Palette Generator">
+<meta property="og:description" content="Paste a hex, RGB, HSL, or color name and instantly generate beautiful, shareable color palettes.">
+<meta property="og:url" content="https://gitwingo.github.io/palette/">
+<meta property="og:site_name" content="palette.">
+<meta property="og:image" content="https://gitwingo.github.io/palette/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="palette. — Free Online Color Palette Generator">
+<meta name="twitter:description" content="Paste a hex, RGB, HSL, or color name and instantly generate beautiful, shareable color palettes.">
+<meta name="twitter:image" content="https://gitwingo.github.io/palette/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "palette.",
+  "url": "https://gitwingo.github.io/palette/",
+  "description": "Free online color palette generator. Paste a hex, RGB, HSL, or color name to instantly generate beautiful, shareable color combinations with contrast checking and CSS export.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "gitwingo",
+    "url": "https://github.com/gitwingo"
+  }
+}
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
@@ -57,7 +104,8 @@
     display:flex; align-items:center; justify-content:space-between;
     margin-bottom:34px;
   }
-  .logo{ font-weight:700; font-size:19px; letter-spacing:-0.02em; }
+  .logo{ font-weight:700; font-size:19px; letter-spacing:-0.02em; margin:0; }
+  .tagline{ font-size:12.5px; color:var(--ink-faint); margin:-20px 0 22px; max-width:560px; line-height:1.5; }
   .logo .dot{ color: var(--ink-faint); }
 
   .theme-toggle{
@@ -283,9 +331,11 @@
 <body>
 <div class="app">
   <header>
-    <div class="logo">palette<span class="dot">.</span></div>
+    <h1 class="logo">palette<span class="dot">.</span></h1>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
   </header>
+
+  <p class="tagline">A minimalist color palette generator — paste any hex code, RGB, HSL value, or color name to instantly create, preview, and export beautiful color combinations.</p>
 
   <div class="input-row">
     <div class="input-wrap">
