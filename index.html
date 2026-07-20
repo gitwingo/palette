@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>palette. - Free Online Color Palette Generator & Color Picker Tool</title>
+<title>palette. — Free Online Color Palette Generator & Color Picker Tool</title>
 <meta name="description" content="Paste a hex code, RGB, HSL, or color name and instantly generate beautiful color palettes. Lock colors, check WCAG contrast, export as CSS/SCSS/Tailwind, and download a shareable PNG card. Free, no signup, works in your browser.">
 <meta name="keywords" content="color palette generator, color picker, hex to rgb, color scheme generator, palette maker, color combinations, contrast checker, css color variables">
 <meta name="robots" content="index, follow">
@@ -12,7 +12,6 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <meta name="google-site-verification" content="tLVHcFQqO0U_Osw3QCl_rqNTLAOo5p2zQ6iRDow-tvY" />
-
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="palette. — Free Online Color Palette Generator">
@@ -998,29 +997,38 @@
     return (text || 'palette').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'palette';
   }
 
-  /* ---------- saved palettes (persisted via window.storage, personal / not shared) ---------- */
-  const STORAGE_KEY = 'saved-palettes';
+  /* ---------- saved palettes (persisted via localStorage, this browser only) ---------- */
+  const STORAGE_KEY = 'palette.saved-palettes';
   let savedPalettes = [];
-  let storageAvailable = typeof window.storage !== 'undefined' && !!window.storage;
+  let storageAvailable = (function(){
+    try{
+      const testKey = '__palette_storage_test__';
+      localStorage.setItem(testKey, '1');
+      localStorage.removeItem(testKey);
+      return true;
+    }catch(e){
+      return false; // private/incognito mode, cookies disabled, or storage quota issues
+    }
+  })();
 
   async function loadSavedPalettes(){
     if(!storageAvailable) return [];
     try{
-      const res = await window.storage.get(STORAGE_KEY, false);
-      if(!res || !res.value) return [];
-      const parsed = JSON.parse(res.value);
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return [];
+      const parsed = JSON.parse(raw);
       return Array.isArray(parsed) ? parsed : [];
     }catch(e){
-      return []; // key doesn't exist yet, or storage unavailable
+      return []; // corrupted or missing data
     }
   }
   async function persistSavedPalettes(list){
-    if(!storageAvailable){ toast("Can't save — storage isn't available here"); return false; }
+    if(!storageAvailable){ toast("Can't save — your browser is blocking local storage"); return false; }
     try{
-      const res = await window.storage.set(STORAGE_KEY, JSON.stringify(list), false);
-      return !!res;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      return true;
     }catch(e){
-      toast('Save failed — please try again');
+      toast('Save failed — storage may be full');
       return false;
     }
   }
